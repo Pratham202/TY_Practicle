@@ -1,0 +1,44 @@
+8. Write a program to Display minimum spanning tree using Prims Algorithm.
+----------------------------------------------------------------------------------
+
+from collections import defaultdict
+
+class Graph:
+    def __init__(self):
+        self.graph = defaultdict(list)
+
+    def add_edge(self, u, v, weight):
+        self.graph[u].append((v, weight))
+        self.graph[v].append((u, weight))
+
+    def prim_mst(self):
+        mst = []
+        visited = set()
+        start_node = list(self.graph.keys())[0]
+        visited.add(start_node)
+
+        while len(visited) < len(self.graph):
+            min_edge = None
+            for u in visited:
+                for v, weight in self.graph[u]:
+                    if v not in visited and (min_edge is None or weight < min_edge[2]):
+                        min_edge = (u, v, weight)
+
+            if min_edge is not None:
+                u, v, weight = min_edge
+                mst.append((u, v, weight))
+                visited.add(v)
+
+        return mst
+
+g = Graph()
+g.add_edge('A', 'B', 3)
+g.add_edge('A', 'C', 1)
+g.add_edge('B', 'C', 4)
+g.add_edge('B', 'D', 6)
+g.add_edge('C', 'D', 2)
+
+minimum_spanning_tree = g.prim_mst()
+print("Minimum Spanning Tree:")
+for edge in minimum_spanning_tree:
+    print(f"{edge[0]} -- {edge[1]} (Weight: {edge[2]})")

@@ -1,0 +1,28 @@
+Write a Program to perform Following operation:
+a) Reverse of String
+b) Reverse of Array
+c) Concatenation of Two String
+----------------------------------------------------------------
+
+# a) Reverse of String
+def reverse_string(input_string):
+    return input_string[::-1]
+
+input_str = input("Enter a string to reverse: ")
+print("Reversed String:", reverse_string(input_str))
+
+# b) Reverse of Array
+def reverse_array(arr):
+    return arr[::-1]
+
+input_array = [1, 2, 3, 4, 5]
+print("Original Array:", input_array)
+print("Reversed Array:", reverse_array(input_array))
+
+# c) Concatenation of Two String
+def concatenate_strings(str1, str2):
+    return str1 + str2
+
+string1 = "Hello"
+string2 = "World"
+print("Concatenated String:", concatenate_strings(string1, string2))

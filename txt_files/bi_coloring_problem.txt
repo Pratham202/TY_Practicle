@@ -1,0 +1,42 @@
+10. To Study Bi-coloring problem.
+-----------------------------------------
+
+from collections import defaultdict
+
+class Graph:
+    def __init__(self):
+        self.graph = defaultdict(list)
+
+    def add_edge(self, u, v):
+        self.graph[u].append(v)
+        self.graph[v].append(u)
+
+    def is_bipartite_util(self, u, color):
+        for v in self.graph[u]:
+            if color[v] == -1:
+                color[v] = 1 - color[u]
+                if not self.is_bipartite_util(v, color):
+                    return False
+            elif color[v] == color[u]:
+                return False
+        return True
+
+    def is_bipartite(self):
+        color = [-1] * len(self.graph)
+        for u in self.graph:
+            if color[u] == -1:
+                color[u] = 0
+                if not self.is_bipartite_util(u, color):
+                    return False
+        return True
+
+g = Graph()
+g.add_edge(1, 2)
+g.add_edge(2, 3)
+g.add_edge(3, 4)
+g.add_edge(4, 1)
+
+if g.is_bipartite():
+    print("The graph is bipartite.")
+else:
+    print("The graph is not bipartite.")

@@ -1,0 +1,38 @@
+9. Write a Program for Travelling Sales Person Problem.
+------------------------------------------------------------
+
+import sys
+
+def tsp_dp(graph, start_node):
+    n = len(graph)
+    dp = [[None] * n for _ in range(1 << n)]
+
+    def tsp(mask, current_node):
+        if mask == (1 << n) - 1:
+            return graph[current_node][start_node]
+        
+        if dp[mask][current_node] is not None:
+            return dp[mask][current_node]
+
+        min_cost = sys.maxsize
+        for next_node in range(n):
+            if (mask >> next_node) & 1 == 0:
+                new_mask = mask | (1 << next_node)
+                cost = graph[current_node][next_node] + tsp(new_mask, next_node)
+                min_cost = min(min_cost, cost)
+
+        dp[mask][current_node] = min_cost
+        return min_cost
+
+    return tsp(1 << start_node, start_node)
+
+graph = [
+    [0, 10, 15, 20],
+    [10, 0, 35, 25],
+    [15, 35, 0, 30],
+    [20, 25, 30, 0]
+]
+
+start_node = 0
+min_cost = tsp_dp(graph, start_node)
+print(f"Minimum cost for Traveling Salesperson Problem (TSP): {min_cost}")
