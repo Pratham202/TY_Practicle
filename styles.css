@@ -1,3 +1,19 @@
+h2 a {
+    color: blue; /* Set the hyperlink color to blue */
+    text-decoration: none; /* Remove underline from the hyperlink */
+}
+
+h2 a:hover {
+    text-decoration: underline; /* Add underline on hover */
+}
+
+h2 {
+    color: white; /* Set the text color of the heading to white */
+    background-color: black; /* Set the background color of the heading to black */
+    padding: 10px; /* Add padding for better visibility */
+    display: inline-block; /* Make the heading inline so it doesn't take the full width */
+}
+
 body {
     font-family: Arial, sans-serif;
     margin: 0;
